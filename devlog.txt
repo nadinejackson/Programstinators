@@ -1,12 +1,10 @@
-<Team Name (without word "team")>
-<Member Bubbles>
-<Member Buttercup>
-<Member Blossom>
-pd <pd#>
+Programstinators
+Cheryl Qian
+Nadine Jackson
+T. Fabiha
+pd 2
 ---------------------
-<Project>
-
-
+A text-based game of Mafia where the player is randomly assigned a role of Citizen, Doctor, Detective, Sheriff, or Mafia, competes against other pre-programmed players, and attempts to survive.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 USAGE:
@@ -25,8 +23,6 @@ Flesh out each category whenever necessary, appropriate.
  Need not be fully filled in until end of project,
  but best done as you go along.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 
 /////////// Zone of Reflection \\\\\\\\\\\
 ------------------------------------------
@@ -76,3 +72,4 @@ yyyy-mm-dd
 <Member> :: <Thing member did.>
 <Member> :: <Thing member did.>
 ==============================================================
+
