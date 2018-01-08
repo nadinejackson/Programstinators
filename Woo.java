@@ -30,6 +30,7 @@ public class Woo{
 	    livingChars.add(bob);
 	}
 	livingChars.add(player);
+	System.out.println("Here are the players you'll be playing against:\n" + livingChars);
     }//end popGame()
 
     public static void day(){
@@ -47,5 +48,10 @@ public class Woo{
     public static void main(String[] args){
 	begin();
 	System.out.println("We’re done for now.");
+	while (livingChars.get(mafiaLoc).isAlive() &&
+	       player.isAlive()){
+	    night();
+	    day();
+	}
     }//end main()
 }//end Woo
