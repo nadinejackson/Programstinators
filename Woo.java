@@ -22,7 +22,7 @@ public class Woo{
 	System.out.println("How many other people do you want in this game?");
 	popGame(Keyboard.readInt());
     }//end begin()
-    public void popGame(int numPlayers){
+    public static void popGame(int numPlayers){
 	String name;
 	for (int i = 0; i < numPlayers; i++){
 	    name = ALLNAMES[i];
