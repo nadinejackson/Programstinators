@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import cs1.Keyboard;
 public class Woo{
-    private ArrayList livingChars;
-    private ArrayList notebook;
-    private Character player;
-    private final String[] ALLNAMES = {"Cheryl", "Nadine", "Fabiha", "Taylor", "Isa", "Miguel", "Maya", "Grace", "Michael", "Jerin", "Mahtab", "Tanvirul", "Matthew", "Sofian", "Briana", "Nysa", "Sydni", "Seth", "Sasha", "Justin", "Ishmael", "hydrogen", "helium", "lithium", "beryllium", "boron", "carbon", "nitrogen", "oxygen", "flourine", "neon"};
+    private static ArrayList<Character> livingChars = new ArrayList<Character>();
+    private static ArrayList<Object> notebook;
+    private static Character player;
+    private static final String[] ALLNAMES = {"Cheryl", "Nadine", "Fabiha", "Taylor", "Isa", "Miguel", "Maya", "Grace", "Michael", "Jerin", "Mahtab", "Tanvirul", "Matthew", "Sofian", "Briana", "Nysa", "Sydni", "Seth", "Sasha", "Justin", "Ishmael", "hydrogen", "helium", "lithium", "beryllium", "boron", "carbon", "nitrogen", "oxygen", "flourine", "neon"};
     private int mafiaLoc = 0;
 
     public static void begin(){
@@ -30,22 +30,28 @@ public class Woo{
 	    livingChars.add(bob);
 	}
 	livingChars.add(player);
+	System.out.println("Here are the players you'll be playing against:\n" + livingChars);
     }//end popGame()
 
-    public void day(){
+    public static void day(){
 
     }//end day()
 
-    public void night(){
+    public static void night(){
 
     }//end night()
 
-    public void end(){
+    public static void end(){
 
     }//end end()
 
     public static void main(String[] args){
 	begin();
 	System.out.println("We’re done for now.");
+	while (livingChars.get(mafiaLoc).isAlive() &&
+	       player.isAlive()){
+	    night();
+	    day();
+	}
     }//end main()
 }//end Woo
