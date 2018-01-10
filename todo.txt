@@ -1,0 +1,51 @@
+-Make class Woo request basic user input, and output dialogue indicating day and night cycles. (The computer is God.)
+	Attributes:
+		ArrayList<Character> livingChars
+-Make class Character with:
+	Attributes:
+		int susVal
+		boolean evil 
+		String name
+	Actions:
+		boolean vote()
+		Character accuse()
+-Incorporate Character into Woo by having the player vote() every day and initializing the susVal randomly.
+-Sort by susVal at the beginning of every day before voting
+-Incorporate ArrayList<Character> livingChars into process and dialogue with people dying as appropriate
+-Make story for how a game ends (Mafia won or lost)
+-Create rule list and allow user to access it at any time by typing R
+-Make two subclasses of Character:
+	Mafia:
+		Actions:
+			Character kill()
+	Doctor:
+		Actions:
+			Character save()
+-Update how game ending story works
+-Allow player to choose whether they are Mafia or Doctor, and allow them to kill() and save() as appropriate.
+-Woo outputs description of killed and death scene
+-Ask player for name, type of character, and number of players
+-Allow randomization of above
+-Add more characters:
+	Detective
+-Update rule list
+-Allow the player to have simple dialogue with other characters (hardcoded) during the day phase
+-Make random susVal for each player
+-Weight the susVal depending on whether the player is Mafia
+-Make the susVal more accurate over time
+-Increase susVal based on how much the player speaks
+-Warn the player that susVal may increase based on dialogue
+-Construct and implement questions that other players will ask to gauge the player’s suspiciousness.
+-Allow the user to defend him/herself
+-3 happen per day
+-Create list of characters to be displayed w/ numbers
+-Update rule list
+-Allow user to investigate the scene
+-Create energy instance variable so when the player completes an action, it depletes their energy
+-Create notebook for player to write suppositions, connections, etc.
+-Allow user to enter info in notebook at end of day
+-Allow user to eavesdrop on conversations
+-Update rule list
+-Debug more
+-------------------------------------------------------------
+Timeline (Jan 9th - Jan 16th, highlit days are weekends/no school):
