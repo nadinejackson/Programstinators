@@ -97,6 +97,8 @@ public class Woo{
 	    System.out.println("It's daytime and no one died, not even " + maybeDed + "\n");
 	else
 	    System.out.println("It's daytime, and " + maybeDed + " died");
+
+	
     }//end day()
 
     public static void night(){
@@ -130,6 +132,9 @@ public class Woo{
 		if (susOne.getType().equals("Mafia")){
 		    
 		    System.out.println("Don't trust " + susOne + " because they're the Mafia");
+		}
+		else if (susOne.equals(player)) {
+		    System.out.println("Picking yourself? Are you sure you're fit to be a detective?");
 		}
 		else{
 		    System.out.println("Nah, " + susOne + " is pretty innocent.");
