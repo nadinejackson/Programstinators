@@ -96,7 +96,7 @@ public class Woo{
 	if (maybeDed.isAlive())
 	    System.out.println("It's daytime and no one died, not even " + maybeDed + "\n");
 	else
-	    System.out.println("It's daytime, and " + maybeDed + " died");
+	    System.out.println("It's daytime, and " + maybeDed + " died. \nThey were " + maybeDed.getType());
 
 	
     }//end day()
@@ -157,6 +157,12 @@ public class Woo{
 	if (!(livingChars.get(saveIndex).equals(citizens.get(killIndex)))){
 	    citizens.get(killIndex).die();
 	    maybeDed = citizens.remove(killIndex);
+
+	    for (int x = 0; x < livingChars.size(); x++) {
+		if (livingChars.get(x).equals(maybeDed)) {
+		    livingChars.remove(x);
+		}
+	    }
 	}
 	else {
 	    maybeDed = citizens.get(killIndex);
@@ -171,10 +177,15 @@ public class Woo{
     public static void main(String[] args){
 	begin();
 	
-	while (mafia.size() > 0 &&
-	       player.isAlive()){	    
+	while (mafia.size() < citizens.size() &&
+	       player.isAlive() && mafia.size() > 0){	    
 	    night();
 	    day();
 	    }
+	
+	if (!(player.isAlive())) {
+	    System.out.println("You lose. Here is who all the remaining living Characters were:");
+	    System.out.println(display(livingChars));
+	}
     }//end main()
 }//end Woo
