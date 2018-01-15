@@ -59,26 +59,27 @@ public class Woo{
     }
     public static void popGame(int numPlayers){
 	String name;
+	int r = (int) (Math.random() * 10);
 	for (int i = 0; i < numPlayers - 2; i++){
-	    name = ALLNAMES[i];
+	    name = ALLNAMES[r + i*i];
 	    Character bob = new Character(name);
 	    livingChars.add(bob);
 	}
 	if (type != 1)
 	    {
-		Mafia bob = new Mafia(ALLNAMES[livingChars.size() + 1]);
+		Mafia bob = new Mafia(ALLNAMES[r - 1]);
 		mafia.add(bob);
 		livingChars.add(bob);
 	    }
 	if (type != 2)
 	    {
-		Doctor bob = new Doctor(ALLNAMES[livingChars.size() + 5]);
+		Doctor bob = new Doctor(ALLNAMES[r + 5]);
 		Doc = bob;
 		livingChars.add(bob);
 	    }
 	if (type != 3)
 	    {
-		Investigator bob = new Investigator(ALLNAMES[livingChars.size() + 7]);
+		Investigator bob = new Investigator(ALLNAMES[r + 7]);
 		Detective = bob;
 		livingChars.add(bob);
 	    }
@@ -87,7 +88,7 @@ public class Woo{
 
     public static void day(){
 	if (maybeDed.isAlive())
-	    System.out.println("It's dyatime and no one died, not even " + maybeDed);
+	    System.out.println("It's daytime and no one died, not even " + maybeDed + "\n");
 	else
 	    System.out.println("It's daytime, and " + maybeDed + " died");
     }//end day()
@@ -112,7 +113,7 @@ public class Woo{
 	if (player.getType().equals("Investigator")){
 	    {
 		susNum = -1;
-		while (susNum <= 0 || susNum >= livingChars.size() - 1){
+		while (susNum < 0 || susNum >= livingChars.size() - 1){
 		    System.out.println("Type the number of who you want to investigate, in the following list:");
 		    System.out.println(display());
 		    susNum = Keyboard.readInt() - 1;
