@@ -100,20 +100,20 @@ public class Woo{
 	Character susOne;
 	if (player.getType().equals("Doctor"))
 	    {
-		saveIndex = -1;
-		while (saveIndex <= 0 || saveIndex >= livingChars.size()){
+		saveIndex = -2;
+		while (saveIndex < -1 || saveIndex >= livingChars.size()){
 		System.out.println("Type the number of who you want to save, in the following list:");
 		System.out.println(display());
-		saveIndex = Keyboard.readInt() - 1;
+		saveIndex = Keyboard.readInt();
 		}
 	    }
 	else{
-	    saveIndex =(int) Math.random() * livingChars.size();
+	    saveIndex =(int) (Math.random() * livingChars.size());
 	}
 	if (player.getType().equals("Investigator")){
 	    {
-		susNum = -1;
-		while (susNum < 0 || susNum >= livingChars.size() - 1){
+		susNum = -2;
+		while (susNum < -1 || susNum >= livingChars.size() - 1){
 		    System.out.println("Type the number of who you want to investigate, in the following list:");
 		    System.out.println(display());
 		    susNum = Keyboard.readInt() - 1;
@@ -141,12 +141,16 @@ public class Woo{
 	    }
 	else{
 
-	    killIndex = (int) Math.random() * livingChars.size();
+	    killIndex = (int) (Math.random() * livingChars.size());
 	}
 	if (saveIndex != killIndex){
-	    ((Mafia)player).kill(livingChars.get(killIndex));
+	    livingChars.get(killIndex).die();
+	    maybeDed = livingChars.remove(killIndex);
 	}
-	maybeDed = livingChars.remove(killIndex);
+	else {
+	    maybeDed = livingChars.get(killIndex);
+	}
+	
     }//end night()
 
     public static void end(){
