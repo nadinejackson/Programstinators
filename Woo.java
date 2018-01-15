@@ -8,6 +8,7 @@ public class Woo{
     private static ArrayList<Object> notebook;
     private static Character player;
     private static int type = 0;
+    private static Character maybeDed;
     private static final String[] ALLNAMES = {"Cheryl", "Nadine", "Fabiha", "Taylor", "Isa", "Miguel", "Maya", "Grace", "Michael", "Jerin", "Mahtab", "Tanvirul", "Matthew", "Sofian", "Briana", "Nysa", "Sydni", "Seth", "Sasha", "Justin", "Ishmael", "hydrogen", "helium", "lithium", "beryllium", "boron", "carbon", "nitrogen", "oxygen", "flourine", "neon"};
     
 
@@ -27,15 +28,15 @@ public class Woo{
 	}
 	System.out.println("Pick a name (type and press enter)");
 	if (type == 1){
-	    Character player = new Mafia(Keyboard.readString());
+	    player = new Mafia(Keyboard.readString());
 	    mafia.add((Mafia)player);
 	}
 	else if (type == 2){
-	    Character player = new Doctor(Keyboard.readString());
+	    player = new Doctor(Keyboard.readString());
 	    Doc = (Doctor)player; //alias
 	}
 	else{
-	    Character player = new Investigator(Keyboard.readString());
+	    player = new Investigator(Keyboard.readString());
 	    Detective = (Investigator)player;
 	}
 	    
@@ -52,7 +53,7 @@ public class Woo{
 	String retStr = "";
 	for(int i = 0; i < livingChars.size(); i++)
 	    {
-		retStr += (i + 1) + "- " + livingChars.get(i) + "\n";
+		retStr += i + "- " + livingChars.get(i) + "\n";
 	    }
 	return retStr;
     }
@@ -67,22 +68,28 @@ public class Woo{
 	    {
 		Mafia bob = new Mafia(ALLNAMES[livingChars.size() + 1]);
 		mafia.add(bob);
+		livingChars.add(bob);
 	    }
 	if (type != 2)
 	    {
 		Doctor bob = new Doctor(ALLNAMES[livingChars.size() + 5]);
 		Doc = bob;
+		livingChars.add(bob);
 	    }
 	if (type != 3)
 	    {
 		Investigator bob = new Investigator(ALLNAMES[livingChars.size() + 7]);
 		Detective = bob;
+		livingChars.add(bob);
 	    }
 	System.out.println("Here are the players you'll be playing against:\n" + display());
     }//end popGame()
 
     public static void day(){
-	
+	if (maybeDed.isAlive())
+	    System.out.println("It's dyatime and no one died, not even " + maybeDed);
+	else
+	    System.out.println("It's daytime, and " + maybeDed + " died");
     }//end day()
 
     public static void night(){
@@ -105,13 +112,16 @@ public class Woo{
 	if (player.getType().equals("Investigator")){
 	    {
 		susNum = -1;
-		while (susNum <= 0 || susNum >= livingChars.size()){
-		System.out.println("Type the number of who you want to investigate, in the following list:");
-		System.out.println(display());
-		susNum = Keyboard.readInt() - 1;
+		while (susNum <= 0 || susNum >= livingChars.size() - 1){
+		    System.out.println("Type the number of who you want to investigate, in the following list:");
+		    System.out.println(display());
+		    susNum = Keyboard.readInt() - 1;
 		}
-		susOne = livingChars.get(susNum);
+		
+		susOne = livingChars.get(susNum + 1);
+		
 		if (susOne.getType().equals("Mafia")){
+		    
 		    System.out.println("Don't trust " + susOne + " because they're the Mafia");
 		}
 		else{
@@ -125,7 +135,7 @@ public class Woo{
 		while (killIndex <= 0 || killIndex >= livingChars.size()){
 		System.out.println("Type the number of who you want to kill, in the following list:");
 		System.out.println(display());
-		killIndex = Keyboard.readInt() - 1;
+		killIndex = Keyboard.readInt();
 		}
 	    }
 	else{
@@ -135,6 +145,7 @@ public class Woo{
 	if (saveIndex != killIndex){
 	    ((Mafia)player).kill(livingChars.get(killIndex));
 	}
+	maybeDed = livingChars.remove(killIndex);
     }//end night()
 
     public static void end(){
@@ -143,10 +154,9 @@ public class Woo{
 
     public static void main(String[] args){
 	begin();
-	System.out.println("We’re done for now.");
+	
 	while (mafia.size() > 0 &&
-	       player.isAlive())
-	    {
+	       player.isAlive()){	    
 	    night();
 	    day();
 	    }

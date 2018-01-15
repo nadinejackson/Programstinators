@@ -3,6 +3,8 @@ public class Character{
     protected boolean alive;
     protected String type;
     public Character(String givenName){
+	type = "Citizen";
+	alive = true;
 	name = givenName;
     }
     public String setName(String newName){
@@ -18,7 +20,7 @@ public class Character{
     }
     public String toString()
     {
-	return name;
+	return name + " -- " + type;
     }
     public boolean isAlive(){
 	return alive;
@@ -26,8 +28,5 @@ public class Character{
     public void die(){
 	alive = false;
     }
-    public void revive(){
-	alive = true;
-    }
-   
+    
 }

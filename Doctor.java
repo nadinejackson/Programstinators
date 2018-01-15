@@ -4,7 +4,6 @@ public class Doctor extends Character{
 	type = "Doctor";
     }
     public Character save (Character person){
-	person.revive();
 	return person;
     }
 }
