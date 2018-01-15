@@ -96,7 +96,7 @@ public class Woo{
 	if (maybeDed.isAlive())
 	    System.out.println("It's daytime and no one died, not even " + maybeDed + "\n");
 	else
-	    System.out.println("It's daytime, and " + maybeDed + " died. \nThey were " + maybeDed.getType());
+	    System.out.println("It's daytime, and " + maybeDed + " died. \nThey were " + maybeDed.getType() + "\n");
 
 	
     }//end day()
@@ -131,13 +131,13 @@ public class Woo{
 		
 		if (susOne.getType().equals("Mafia")){
 		    
-		    System.out.println("Don't trust " + susOne + " because they're the Mafia");
+		    System.out.println("Don't trust " + susOne + " because they're the Mafia.\n");
 		}
 		else if (susOne.equals(player)) {
-		    System.out.println("Picking yourself? Are you sure you're fit to be a detective?");
+		    System.out.println("Picking yourself? Are you sure you're fit to be a detective?\n");
 		}
 		else{
-		    System.out.println("Nah, " + susOne + " is pretty innocent.");
+		    System.out.println("Nah, " + susOne + " is pretty innocent.\n");
 		}
 	    }
 	}
@@ -183,9 +183,16 @@ public class Woo{
 	    day();
 	    }
 	
-	if (!(player.isAlive())) {
-	    System.out.println("You lose. Here is who all the remaining living Characters were:");
-	    System.out.println(display(livingChars));
+	if (!(player.isAlive() ||
+	      ( !(player.getType().equals("Mafia")) && mafia.size() >= citizens.size()))) {
+	    System.out.println("You lose. :(\n");	    
 	}
+	else {
+	    System.out.println("You win!!!\n");
+	}
+	System.out.println("Here is who all the characters were:");
+	System.out.println(display(livingChars));
+
+	
     }//end main()
 }//end Woo
