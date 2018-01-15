@@ -1,15 +1,17 @@
 public class Character{
-    private String name;
-    private int num;
-    private boolean alive;
-    public Character(String givenName, int number){
+    protected String name;
+    protected boolean alive;
+    protected String type;
+    public Character(String givenName){
 	name = givenName;
-	num = number;
     }
     public String setName(String newName){
 	String oldName = name;
 	name = newName;
 	return oldName;
+    }
+    public String getType(){
+	return type;
     }
     public String getName(){
 	return name;
@@ -21,4 +23,11 @@ public class Character{
     public boolean isAlive(){
 	return alive;
     }
+    public void die(){
+	alive = false;
+    }
+    public void revive(){
+	alive = true;
+    }
+   
 }
