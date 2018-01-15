@@ -3,6 +3,7 @@ import cs1.Keyboard;
 public class Woo{
     private static ArrayList<Character> livingChars = new ArrayList<Character>();
     private static ArrayList<Mafia> mafia = new ArrayList<Mafia>();
+    private static ArrayList<Character> citizens = new ArrayList<Character>();
     private static Doctor Doc;
     private static Investigator Detective;
     private static ArrayList<Object> notebook;
@@ -33,10 +34,12 @@ public class Woo{
 	}
 	else if (type == 2){
 	    player = new Doctor(Keyboard.readString());
+	    citizens.add(player);
 	    Doc = (Doctor)player; //alias
 	}
 	else{
 	    player = new Investigator(Keyboard.readString());
+	    citizens.add(player);
 	    Detective = (Investigator)player;
 	}
 	    
@@ -49,11 +52,11 @@ public class Woo{
 	popGame(7);
     }//end begin()
 
-    public static String display(){
+    public static String display(ArrayList thing){
 	String retStr = "";
-	for(int i = 0; i < livingChars.size(); i++)
+	for(int i = 0; i < thing.size(); i++)
 	    {
-		retStr += i + "- " + livingChars.get(i) + "\n";
+		retStr += i + "- " + thing.get(i) + "\n";
 	    }
 	return retStr;
     }
@@ -64,6 +67,7 @@ public class Woo{
 	    name = ALLNAMES[r + i*i];
 	    Character bob = new Character(name);
 	    livingChars.add(bob);
+	    citizens.add(bob);
 	}
 	if (type != 1)
 	    {
@@ -76,14 +80,16 @@ public class Woo{
 		Doctor bob = new Doctor(ALLNAMES[r + 5]);
 		Doc = bob;
 		livingChars.add(bob);
+		citizens.add(bob);
 	    }
 	if (type != 3)
 	    {
 		Investigator bob = new Investigator(ALLNAMES[r + 7]);
 		Detective = bob;
 		livingChars.add(bob);
+		citizens.add(bob);
 	    }
-	System.out.println("Here are the players you'll be playing against:\n" + display());
+	System.out.println("Here are the players you'll be playing against:\n" + display(livingChars));
     }//end popGame()
 
     public static void day(){
@@ -103,7 +109,7 @@ public class Woo{
 		saveIndex = -2;
 		while (saveIndex < -1 || saveIndex >= livingChars.size()){
 		System.out.println("Type the number of who you want to save, in the following list:");
-		System.out.println(display());
+		System.out.println(display(livingChars));
 		saveIndex = Keyboard.readInt();
 		}
 	    }
@@ -115,7 +121,7 @@ public class Woo{
 		susNum = -2;
 		while (susNum < -1 || susNum >= livingChars.size() - 1){
 		    System.out.println("Type the number of who you want to investigate, in the following list:");
-		    System.out.println(display());
+		    System.out.println(display(livingChars));
 		    susNum = Keyboard.readInt() - 1;
 		}
 		
@@ -133,22 +139,22 @@ public class Woo{
 	if (player.getType().equals("Mafia"))
 	    {
 		killIndex = -1;
-		while (killIndex <= 0 || killIndex >= livingChars.size()){
+		while (killIndex < 0 || killIndex >= citizens.size()){
 		System.out.println("Type the number of who you want to kill, in the following list:");
-		System.out.println(display());
+		System.out.println(display(citizens));
 		killIndex = Keyboard.readInt();
 		}
 	    }
 	else{
-
-	    killIndex = (int) (Math.random() * livingChars.size());
+	    
+	    killIndex = (int) (Math.random() * citizens.size());
 	}
-	if (saveIndex != killIndex){
-	    livingChars.get(killIndex).die();
-	    maybeDed = livingChars.remove(killIndex);
+	if (!(livingChars.get(saveIndex).equals(citizens.get(killIndex)))){
+	    citizens.get(killIndex).die();
+	    maybeDed = citizens.remove(killIndex);
 	}
 	else {
-	    maybeDed = livingChars.get(killIndex);
+	    maybeDed = citizens.get(killIndex);
 	}
 	
     }//end night()
