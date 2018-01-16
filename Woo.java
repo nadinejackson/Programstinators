@@ -71,7 +71,7 @@ public class Woo{
 	}
 	if (type != 1)
 	    {
-		Mafia bob = new Mafia(ALLNAMES[r - 1]);
+		Mafia bob = new Mafia(ALLNAMES[r + 1]);
 		mafia.add(bob);
 		livingChars.add(bob);
 	    }
@@ -92,6 +92,7 @@ public class Woo{
 	swap();
 	for (int i = 0; i < livingChars.size(); i++)
 	    {
+		livingChars.get(i).changeSusPts((int) (Math.random() * 20));
 		if(!(livingChars.get(i).getType().equals("Mafia")))
 		    citizens.add(livingChars.get(i));
 	    }
@@ -130,23 +131,47 @@ public class Woo{
 		    System.out.println("Whom? (Type therey're number)\n" + display(livingChars));
 		    livingChars.get(Keyboard.readInt()).incAccusations();
 		}
-	    for(int i = 1; i < livingChars.size(); i++)
-		{
-		    int accusation = i;
-		    while (accusation == i)
-			{
-			    accusation = (int) (Math.random() * livingChars.size());
-			}
-		    livingChars.get(i).accuse(livingChars.get(accusation));
-		}
-	    int rep = 0;
-	    for(int i = 0; i < livingChars.size(); i++)
-		{
-		    if(livingChars.get(rep).getAccusations() < livingChars.get(i).getAccusations())
-			{
-			    rep = i;
-			}
-		}
+	    if (citizens.size() > mafia.size()){
+		Character[] topTwee = new Character[3];
+		for(int i = 0; i < 3; i++)
+		    {
+			topTwee[i] = livingChars.get(i);
+		    }
+		for(int i = 3; i < livingChars.size(); i++)
+		    {
+			for (int x = 0; i < 3; i++)
+			    {
+				if (livingChars.get(i).getSusPoints() > topTwee[x].getSusPoints()){
+				    topTwee[x] = livingChars.get(i);
+				    break;
+				}
+			    }
+		    }
+		for(int i = 1; i < livingChars.size(); i++)
+		    {
+			int accusation = i;
+			while (accusation == i)
+			    {
+				accusation = (int) (Math.random() * 3);
+			    }
+			livingChars.get(i).accuse(topTwee[accusation]);
+		    }
+	    }
+		int rep = 0;
+		for(int i = 0; i < livingChars.size(); i++)
+		    {
+			if(livingChars.get(rep).getAccusations() < livingChars.get(i).getAccusations())
+			    {
+				rep = i;
+			    }
+		    }
+		livingChars.get(rep).changeSusPts(5);
+	    
+	    
+		for (int i = 0; i < mafia.size(); i++)
+		    {
+			mafia.get(i).changeSusPts((int) (Math.random() * 5));
+		    }
 	    System.out.println("Do you think that " + livingChars.get(rep) + " should die for their actions? (0 or 1)");
 	    int votes = 0;
 	    if(Keyboard.readInt() == 1)
@@ -185,6 +210,10 @@ public class Woo{
 				}
 			}
 		    livingChars.remove(rep);
+		}
+	    else
+		{
+		    System.out.println("We didn't kill anybody this time :(");
 		}
 	}
     }//end day()
@@ -242,7 +271,7 @@ public class Woo{
 	    
 	    killIndex = (int) (Math.random() * citizens.size());
 	}
-	if (!(livingChars.get(saveIndex).equals(citizens.get(killIndex)))){
+	if (!(livingChars.get(saveIndex).equals(citizens.get(killIndex))) || ! Doc.isAlive()){
 	    citizens.get(killIndex).die();
 	    maybeDed = citizens.remove(killIndex);
 

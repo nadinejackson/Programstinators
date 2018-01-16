@@ -3,6 +3,7 @@ public class Character{
     protected boolean alive;
     protected String type;
     protected int accusations;
+    protected int susPoints;
     public Character(String givenName){
 	type = "Citizen";
 	alive = true;
@@ -21,7 +22,7 @@ public class Character{
     }
     public String toString()
     {
-	return name + " -- " + type;
+	return name + " -- " + type + " -- SP: " + susPoints;
     }
     public boolean isAlive(){
 	return alive;
@@ -47,5 +48,13 @@ public class Character{
     }
     public void resetAcc(){
 	accusations = 0;
+    }
+    public int getSusPoints()
+    {
+	return susPoints;
+    }
+    public void changeSusPts(int amount)
+    {
+	susPoints += amount;
     }
 }
