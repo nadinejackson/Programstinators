@@ -24,7 +24,7 @@ public class Woo{
 	}
 	
 	while(type < 1 || type > 3){
-	    System.out.println("Type the number of one of the three following types and press enter\n" + "1. Mafia\n2.Doctor\n3.Detective");
+	    System.out.println("Type the number of one of the three following types and press enter\n" + "1. Mafia\n2. Doctor\n3. Detective");
 	    type = Keyboard.readInt();
 	}
 	System.out.println("Pick a name (type and press enter)");
@@ -67,7 +67,7 @@ public class Woo{
 	    name = ALLNAMES[r + i*i];
 	    Character bob = new Character(name);
 	    livingChars.add(bob);
-	    citizens.add(bob);
+	    //citizens.add(bob);
 	}
 	if (type != 1)
 	    {
@@ -80,17 +80,40 @@ public class Woo{
 		Doctor bob = new Doctor(ALLNAMES[r + 5]);
 		Doc = bob;
 		livingChars.add(bob);
-		citizens.add(bob);
+		//citizens.add(bob);
 	    }
 	if (type != 3)
 	    {
 		Investigator bob = new Investigator(ALLNAMES[r + 7]);
 		Detective = bob;
 		livingChars.add(bob);
-		citizens.add(bob);
+		//citizens.add(bob);
+	    }
+	swap();
+	for (int i = 0; i < livingChars.size(); i++)
+	    {
+		if(!(livingChars.get(i).getType().equals("Mafia")))
+		    citizens.add(livingChars.get(i));
 	    }
 	System.out.println("Here are the players you'll be playing against:\n" + display(livingChars));
     }//end popGame()
+
+    public static void swap()
+    {
+	Character holder = livingChars.get(0);
+	for(int i = 1; i < livingChars.size(); i++)
+	    {
+		int place = 0;
+		while (place == 0)
+		    {
+			place = (int) (Math.random() * (livingChars.size() - 1));
+		    }
+		//holder = livingChars.get(place);
+		//livingChars.remove(place);
+		//livingChars.add(place, livingChars.remove(i));
+		livingChars.set(i, livingChars.set(place, livingChars.get(i)));
+	    }
+    }
 
     public static void day(){
 	int accuse = 2;
