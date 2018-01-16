@@ -93,12 +93,77 @@ public class Woo{
     }//end popGame()
 
     public static void day(){
+	int accuse = 2;
+	for (int i = 0; i < livingChars.size(); i++)
+	    livingChars.get(i).resetAcc();
 	if (maybeDed.isAlive())
 	    System.out.println("It's daytime and no one died, not even " + maybeDed + "\n");
 	else
 	    System.out.println("It's daytime, and " + maybeDed + " died. \nThey were " + maybeDed.getType() + "\n");
-
-	
+	if (player.isAlive()){
+	    System.out.println("Do you have an accusation? (0 for no, 1 for yes)");
+	    if (Keyboard.readInt() == 1)
+		{
+		    System.out.println("Whom? (Type therey're number)\n" + display(livingChars));
+		    livingChars.get(Keyboard.readInt()).incAccusations();
+		}
+	    for(int i = 1; i < livingChars.size(); i++)
+		{
+		    int accusation = i;
+		    while (accusation == i)
+			{
+			    accusation = (int) (Math.random() * livingChars.size());
+			}
+		    livingChars.get(i).accuse(livingChars.get(accusation));
+		}
+	    int rep = 0;
+	    for(int i = 0; i < livingChars.size(); i++)
+		{
+		    if(livingChars.get(rep).getAccusations() < livingChars.get(i).getAccusations())
+			{
+			    rep = i;
+			}
+		}
+	    System.out.println("Do you think that " + livingChars.get(rep) + " should die for their actions? (0 or 1)");
+	    int votes = 0;
+	    if(Keyboard.readInt() == 1)
+		{
+		    votes += 1;
+		}
+	    for(int i = 1; i < livingChars.size(); i++)
+		{
+		    if(Math.random() >= 0.5 && i != rep)
+			{
+			    votes += 1;
+			}
+		}
+	    if (votes > livingChars.size() / 2)
+		{
+		    System.out.println("Oh hey look we killed a person and their name is " + livingChars.get(rep));
+		    livingChars.get(rep).die();
+		    if (livingChars.get(rep).getType().equals("Mafia"))
+			{
+			    for (int x = 0; x < mafia.size(); x++)
+				{
+				    if (mafia.get(x).equals(livingChars.get(rep)))
+					{
+					    mafia.remove(x);
+					}
+				}
+			}
+		    else
+			{
+			    for (int x = 0; x < citizens.size(); x++)
+				{
+				    if (citizens.get(x).equals(livingChars.get(rep)))
+					{
+					    citizens.remove(x);
+					}
+				}
+			}
+		    livingChars.remove(rep);
+		}
+	}
     }//end day()
 
     public static void night(){

@@ -2,6 +2,7 @@ public class Character{
     protected String name;
     protected boolean alive;
     protected String type;
+    protected int accusations;
     public Character(String givenName){
 	type = "Citizen";
 	alive = true;
@@ -28,5 +29,23 @@ public class Character{
     public void die(){
 	alive = false;
     }
-    
+    public Character accuse(Character person)
+    {
+	person.incAccusations();
+	return person;
+    }
+    public boolean vote(boolean yes)
+    {
+	return yes;
+    }
+    public int getAccusations()
+    {
+	return accusations;
+    }
+    public void incAccusations(){
+	accusations += 1;
+    }
+    public void resetAcc(){
+	accusations = 0;
+    }
 }
