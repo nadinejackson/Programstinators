@@ -1,10 +1,10 @@
 Programstinators
 Cheryl Qian
 Nadine Jackson
-T. Fabiha
+Tabassum Fabiha
 pd 2
 ---------------------
-A text-based game of Mafia where the player is randomly assigned a role of Citizen, Doctor, Detective, Sheriff, or Mafia, competes against other pre-programmed players, and attempts to survive.
+A text-based game of Mafia where the player is randomly assigned a role of Citizen, Doctor, Detective, or Mafia, competes against other pre-programmed players, and attempts to survive.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 USAGE:
@@ -49,7 +49,7 @@ We changed ___ to ___ bc...
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<tales of wisdom gained...>
+There might be such a thing as too much planning, especially considering the small time frame that we had to complete the project. We were really vague when we were planning, and we delved into specifics for extra things that we didn’t necessarily need. We spent so much time on that that we had only a few days to actually code everything out, and even still we couldn’t manage to reach the point we were aiming for.
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -57,19 +57,56 @@ LESSONS LEARNED
 
  ______   ______   __   __   __       ______   _______     
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
-\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__  
+\:::_ \ \\::::_\(_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\(__  
  \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\ 
-  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/ 
+  \:\ \ \ \\::___\(_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\( 
    \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
-    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
+    \____/_( \_____\( \___/_(   \_____\( \_____\( \_____\( 
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
-yyyy-mm-dd
+2018-01-15
 --------------------------------------------------------------
-<Member> :: <Thing member did.>
-<Member> :: <Thing member did.>
-<Member> :: <Thing member did.>
+Nadine :: Fixed errors in mafia and detective, as a driver again
+Fabiha :: Fixed errors in mafia, as well as Character.java
+Cheryl :: Fixed errors in detective, planning for Conversation.java, updated devlog
 ==============================================================
+2018-01-14
+--------------------------------------------------------------
+Nadine :: Worked on Woo.java as driver (thank you Nadine)
+Fabiha :: Worked on Woo.java, made sure mafia works
+Cheryl :: Worked on Woo.java, made sure detective works
+==============================================================
+2018-01-10
+--------------------------------------------------------------
+Nadine :: Worked on flowchart
+Fabiha :: Worked on flowchart
+Cheryl :: Created and worked on flowchart
+==============================================================
+2018-01-09
+--------------------------------------------------------------
+Nadine :: Added todo file
+Fabiha :: Revised timeline, added empty Mafia file
+Cheryl :: Updated README with UML and more
+==============================================================
+2018-01-08
+--------------------------------------------------------------
+Nadine :: Worked on first version of Woo.java
+Fabiha :: Worked on first version of Woo.java
+Cheryl :: Added README with instructions and description
+==============================================================
+2018-01-05
+--------------------------------------------------------------
+Nadine :: Created first proposal, worked on rules
+Fabiha :: Worked on description and rules in proposal 
+Cheryl :: Worked on description and rules in proposal
+==============================================================
+2018-01-04
+--------------------------------------------------------------
+Nadine :: Added and created devlog, brainstorming
+Fabiha :: brainstorming
+Cheryl :: brainstorming
+==============================================================
+
 
