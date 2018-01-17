@@ -22,7 +22,7 @@ public class Character{
     }
     public String toString()
     {
-	return name + " -- " + type + " -- SP: " + susPoints;
+	return name;
     }
     public boolean isAlive(){
 	return alive;
