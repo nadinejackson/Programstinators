@@ -5,7 +5,7 @@ public class Story
     private static String[] luck = {" went through years of therapy"," utilized their keys to success"," just used a little elbow grease"," watched a motivational speaker, got inspired"," looked at the problem differently"," were brought a freshly sharpened #2 pencil by the love of their life"," got 8 hours of sleep, drank 8 glasses of water"," drank from the fountain of youth"," took a stroll through Central Park"," took a deep breath through their inhaler"};
     public static String deathStory(Character they)
     {
-	return they + " was " + action[(int) (Math.random() * 10)] + " when, suddenly, " + they + interruption[(int) (Math.random() * 10)] + " and died.";
+	return they + " was " + "" + action[(int) (Math.random() * 10)] + " when, suddenly, " + they + " " + interruption[(int) (Math.random() * 10)] + " and died.";
     }
     public static String survivalStory(Character they)
     {
