@@ -10,7 +10,7 @@ public class Woo{
     private static Character player;
     private static int type = 0;
     private static Character maybeDed;
-    private static final String[] ALLNAMES = {"Cheryl", "Nadine", "Fabiha", "Taylor", "Isa", "Miguel", "Maya", "Grace", "Michael", "Jerin", "Mahtab", "Tanvirul", "Matthew", "Sofian", "Briana", "Nysa", "Sydni", "Seth", "Sasha", "Justin", "Ishmael", "hydrogen", "helium", "lithium", "beryllium", "boron", "carbon", "nitrogen", "oxygen", "flourine", "neon"};
+    private static final String[] NAMES = {"Taylor", "Isa", "Miguel", "Maya", "Grace", "Michael", "Jerin", "Mahtab", "Tanvirul", "Matthew", "Sofian", "Briana", "Nysa", "Sydni", "Seth", "Sasha", "Justin", "Ishmael", "hydrogen", "helium", "lithium", "beryllium", "boron", "carbon", "nitrogen", "oxygen", "flourine", "neon", "Hasif", "Henry", "Soojin", "Brandon", "Raunak", "Shayan", "Peter", "Kevin", "Oliver", "Jude", "Mohtasim", "Ryan", "Alexia", "Bing", "Jackie", "Ricky", "Susan", "Victor", "Tim", "Bill", "Sean", "Angela", "Maxwell", "Kaitlin", "Alan", "Eric", "Lily", "Maggie", "Nora", "Topher Brown Mykolyk", "Connie", "Jake", "Cheryl", "Nadine", "Fabiha"};
     
 
     public static void begin(){
@@ -42,14 +42,16 @@ public class Woo{
 	    citizens.add(player);
 	    Detective = (Investigator)player;
 	}
-	    
-	
-
-	
+	int countPlayers = 0;
 	livingChars.add(player);
-	//System.out.println("How many other people do you want in this game?");
-	//popGame(Keyboard.readInt());
-	popGame(7);
+	System.out.println("How many other people do you want in this game? (min 7, max 20)");
+	countPlayers = Keyboard.readInt();
+	while (countPlayers < 7 || countPlayers > 20)
+	    {
+		System.out.println("That doesn't sound like a good game. Let's choose a number BETWEEN 7 and 20 (inclusive)");
+		countPlayers = Keyboard.readInt();
+	    }
+	popGame(countPlayers);
     }//end begin()
 
     public static String display(ArrayList thing){
@@ -61,30 +63,45 @@ public class Woo{
 	return retStr;
     }
     public static void popGame(int numPlayers){
+	ArrayList<String> allNames = new ArrayList<String>();
+	for(int i = 0; i < NAMES.length; i++)
+	    {
+		allNames.add(NAMES[i]);
+	    }
 	String name;
 	int r = (int) (Math.random() * 10);
-	for (int i = 0; i < numPlayers - 2; i++){
-	    name = ALLNAMES[r + i*i];
+	for (int i = 0; i < (numPlayers - (numPlayers / 6) - 2); i++){
+	    name = allNames.remove((r + i*i) % allNames.size()); 
 	    Character bob = new Character(name);
 	    livingChars.add(bob);
 	    //citizens.add(bob);
 	}
 	if (type != 1)
 	    {
-		Mafia bob = new Mafia(ALLNAMES[r + 1]);
-		mafia.add(bob);
-		livingChars.add(bob);
+		for (int i = 0; i < (numPlayers / 6); i++){
+		    Mafia bob = new Mafia(allNames.remove(r + 1));
+		    mafia.add(bob);
+		    livingChars.add(bob);
+		}
+	    }
+	else
+	    {
+		for (int i = 0; i < (numPlayers / 6) - 1; i++){
+		    Mafia bob = new Mafia(allNames.remove(r + 1));
+		    mafia.add(bob);
+		    livingChars.add(bob);
+		}
 	    }
 	if (type != 2)
 	    {
-		Doctor bob = new Doctor(ALLNAMES[r + 5]);
+		Doctor bob = new Doctor(allNames.remove(r + 5));
 		Doc = bob;
 		livingChars.add(bob);
 		//citizens.add(bob);
 	    }
 	if (type != 3)
 	    {
-		Investigator bob = new Investigator(ALLNAMES[r + 7]);
+		Investigator bob = new Investigator(allNames.remove(r + 7));
 		Detective = bob;
 		livingChars.add(bob);
 		//citizens.add(bob);
@@ -124,6 +141,7 @@ public class Woo{
 	    System.out.println("It's daytime and no one died, not even " + maybeDed + "\n");
 	else
 	    System.out.println("It's daytime, and " + maybeDed + " died. \nThey were " + maybeDed.getType() + "\n");
+	converse();
 	if (player.isAlive()){
 	    System.out.println("Do you have an accusation? (0 for no, 1 for yes)");
 	    if (Keyboard.readInt() == 1)
@@ -260,15 +278,24 @@ public class Woo{
 	}
 	if (player.getType().equals("Mafia"))
 	    {
+		System.out.println("You and the other mafia:\n" + display(mafia) + "\nare preparing to kill.");
 		killIndex = -1;
 		while (killIndex < 0 || killIndex >= citizens.size()){
-		System.out.println("Type the number of who you want to kill, in the following list:");
-		System.out.println(display(citizens));
-		killIndex = Keyboard.readInt();
+		    System.out.println("Type the number of who you want to kill in the following list:");
+		    System.out.println(display(citizens));
+		    if (Math.random() < 0.5){
+			killIndex = Keyboard.readInt();
+			System.out.println("Fine, you get your way.");
+		    }
+		    else{
+			killIndex = (int) (Math.random() * citizens.size());
+			int x = Keyboard.readInt();
+			System.out.println("No one cares what you think, we killed " + citizens.get(killIndex) + ".");
+		    }
+		
 		}
 	    }
 	else{
-	    
 	    killIndex = (int) (Math.random() * citizens.size());
 	}
 	if (!(livingChars.get(saveIndex).equals(citizens.get(killIndex))) || ! Doc.isAlive()){
@@ -287,6 +314,23 @@ public class Woo{
 	
     }//end night()
 
+    public static void converse()
+    {
+	System.out.println("Would you like to speak to a townsperson? (0 for no, 1 for yes)");
+	if (Keyboard.readInt() == 0)
+	    return;
+	int person2 = 0;
+	System.out.println("Which one?: \n" + display(livingChars));
+	while (p2 >= livingChars.size() || p2 < 1)
+	Character p2 = livingChars.get(person2);
+	for (int i = 0; i < 3 && i < livingChars.size() - 1; i++){
+	    System.out.println(Conversation.getInitQ());
+	    System.out.println(Conversation.getInitA(Keyboard.readInt() - 1));
+	    System.out.println("Would you like to ask another question? (0 for no, 1 for yes)");
+	    if (Keyboard.readInt() == 0)
+		break;
+	}
+    }
     public static void end(){
 
     }//end end()
