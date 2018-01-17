@@ -1,16 +1,15 @@
 import java.util.ArrayList;
 import cs1.Keyboard;
 public class Woo{
-    private static ArrayList<Character> livingChars = new ArrayList<Character>();
-    private static ArrayList<Mafia> mafia = new ArrayList<Mafia>();
-    private static ArrayList<Character> citizens = new ArrayList<Character>();
-    private static Doctor Doc;
-    private static Investigator Detective;
-    private static ArrayList<Object> notebook;
-    private static Character player;
-    private static int type = 0;
-    private static Character maybeDed;
-    private static final String[] NAMES = {"Taylor", "Isa", "Miguel", "Maya", "Grace", "Michael", "Jerin", "Mahtab", "Tanvirul", "Matthew", "Sofian", "Briana", "Nysa", "Sydni", "Seth", "Sasha", "Justin", "Ishmael", "hydrogen", "helium", "lithium", "beryllium", "boron", "carbon", "nitrogen", "oxygen", "flourine", "neon", "Hasif", "Henry", "Soojin", "Brandon", "Raunak", "Shayan", "Peter", "Kevin", "Oliver", "Jude", "Mohtasim", "Ryan", "Alexia", "Bing", "Jackie", "Ricky", "Susan", "Victor", "Tim", "Bill", "Sean", "Angela", "Maxwell", "Kaitlin", "Alan", "Eric", "Lily", "Maggie", "Nora", "Topher Brown Mykolyk", "Connie", "Jake", "Cheryl", "Nadine", "Fabiha"};
+    private static ArrayList<Character> livingChars = new ArrayList<Character>();//contains a list of all the current living characters 
+    private static ArrayList<Mafia> mafia = new ArrayList<Mafia>();//contains a list of all the current alive mafia characters
+    private static ArrayList<Character> citizens = new ArrayList<Character>();//contains a list of all the current alive non-mafia characters
+    private static Doctor Doc;//the doctor
+    private static Investigator Detective;// the investigator
+    private static Character player;// the player
+    private static int type = 0;//type = 1 : mafia; type = 2 : Doctor; type = 3 : Investigator
+    private static Character maybeDed;//the person who may or may not have died during the night come morning 
+    private static final String[] NAMES = {"Taylor", "Isa", "Miguel", "Maya", "Grace", "Michael", "Jerin", "Mahtab", "Tanvirul", "Matthew", "Sofian", "Briana", "Nysa", "Sydni", "Seth", "Sasha", "Justin", "Ishmael", "hydrogen", "helium", "lithium", "beryllium", "boron", "carbon", "nitrogen", "oxygen", "flourine", "neon", "Hasif", "Henry", "Soojin", "Brandon", "Raunak", "Shayan", "Peter", "Kevin", "Oliver", "Jude", "Mohtasim", "Ryan", "Alexia", "Bing", "Jackie", "Ricky", "Susan", "Victor", "Tim", "Bill", "Sean", "Angela", "Maxwell", "Kaitlin", "Alan", "Eric", "Lily", "Maggie", "Nora", "Topher Brown Mykolyk", "Connie", "Jake", "Cheryl", "Nadine", "Fabiha"};//all possible character names
     
 
     public static void begin(){
@@ -42,6 +41,7 @@ public class Woo{
 	    citizens.add(player);
 	    Detective = (Investigator)player;
 	}
+	
 	int countPlayers = 0;
 	livingChars.add(player);
 	System.out.println("How many other people do you want in this game? (min 7, max 20)");
@@ -51,9 +51,10 @@ public class Woo{
 		System.out.println("That doesn't sound like a good game. Let's choose a number BETWEEN 7 and 20 (inclusive)");
 		countPlayers = Keyboard.readInt();
 	    }
-	popGame(countPlayers);
+	popGame(countPlayers);//populates the game with countPlayer other players
     }//end begin()
 
+    //prints out a numbered list of all the elements in ArrayList thing
     public static String display(ArrayList thing){
 	String retStr = "";
 	for(int i = 0; i < thing.size(); i++)
@@ -62,60 +63,79 @@ public class Woo{
 	    }
 	return retStr;
     }
+
+    //initializes numPlayers number of characters
     public static void popGame(int numPlayers){
+	//creates an ArrayList called allNames so that names can be removed to avoid
+	//multiple characters having the same name
 	ArrayList<String> allNames = new ArrayList<String>();
 	for(int i = 0; i < NAMES.length; i++)
 	    {
 		allNames.add(NAMES[i]);
 	    }
+
+	//sets the name of the character to a random element in allNames
 	String name;
-	int r = (int) (Math.random() * 10);
+	int r = (int) (Math.random() * 10);//random integer [0,9]
+
+	//creates the charactes who don't have any special traits
 	for (int i = 0; i < (numPlayers - (numPlayers / 6) - 2); i++){
-	    name = allNames.remove((r + i*i) % allNames.size()); 
+	    name = allNames.remove((r + i*i) % allNames.size());//prevents IndexOutOfBoundsException
 	    Character bob = new Character(name);
 	    livingChars.add(bob);
 	    //citizens.add(bob);
 	}
-	if (type != 1)
+	
+	if (type != 1)//if the player is not a mafia
 	    {
+		//add numPlayers/6 mafia to the game
 		for (int i = 0; i < (numPlayers / 6); i++){
 		    Mafia bob = new Mafia(allNames.remove(r + 1));
 		    mafia.add(bob);
 		    livingChars.add(bob);
 		}
 	    }
-	else
+	else //if player is a mafia
 	    {
+		//add numPlayers/6 - 1 mafia to the game
 		for (int i = 0; i < (numPlayers / 6) - 1; i++){
 		    Mafia bob = new Mafia(allNames.remove(r + 1));
 		    mafia.add(bob);
 		    livingChars.add(bob);
 		}
 	    }
-	if (type != 2)
+
+	if (type != 2)//if the player is not a doctor
 	    {
+		//create a doctor
 		Doctor bob = new Doctor(allNames.remove(r + 5));
 		Doc = bob;
 		livingChars.add(bob);
 		//citizens.add(bob);
 	    }
-	if (type != 3)
+	if (type != 3)//if the player is not an investigator
 	    {
+		//create an investigator
 		Investigator bob = new Investigator(allNames.remove(r + 7));
 		Detective = bob;
 		livingChars.add(bob);
 		//citizens.add(bob);
 	    }
-	swap();
+	swap();//swaps all the characters by a random amount
+
 	for (int i = 0; i < livingChars.size(); i++)
 	    {
+		//sets all characters with random starting susVals
 		livingChars.get(i).changeSusPts((int) (Math.random() * 20));
+
+		//if the character isn't a Mafia then they are added to the citizens category
 		if(!(livingChars.get(i).getType().equals("Mafia")))
 		    citizens.add(livingChars.get(i));
 	    }
 	System.out.println("Here are the players you'll be playing against:\n" + display(livingChars));
     }//end popGame()
 
+    //swaps every single item randomly
     public static void swap()
     {
 	Character holder = livingChars.get(0);
@@ -137,18 +157,25 @@ public class Woo{
 	int accuse = 2;
 	for (int i = 0; i < livingChars.size(); i++)
 	    livingChars.get(i).resetAcc();
-	if (maybeDed.isAlive())
+
+	
+	if (maybeDed.isAlive())//if the person attacked didn't die
 	    System.out.println("It's daytime and no one died, not even " + maybeDed + "\n");
-	else
+	else //if the person attacked did die
 	    System.out.println("It's daytime, and " + maybeDed + " died. \nThey were " + maybeDed.getType() + "\n");
-	converse();
+
+	converse();//allows the player to talk to one person of their choosing
+	
 	if (player.isAlive()){
 	    System.out.println("Do you have an accusation? (0 for no, 1 for yes)");
-	    if (Keyboard.readInt() == 1)
+
+	    if (Keyboard.readInt() == 1)//if the player wants to, accuses someone
 		{
 		    System.out.println("Whom? (Type therey're number)\n" + display(livingChars));
 		    livingChars.get(Keyboard.readInt()).incAccusations();
 		}
+
+	    //if the mafia hasn't overrun the town
 	    if (citizens.size() > mafia.size()){
 		Character[] topTwee = new Character[3];
 		for(int i = 0; i < 3; i++)
