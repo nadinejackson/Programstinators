@@ -16,17 +16,31 @@ The biggest obstacle that we had to overcome was our programming procrastination
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Though we didn't use them, we learned that java can incorporate 3d arrays, 4d arrays, up to a finite number that we haven't yet determined.
+Though we didn't use them, we learned that java can incorporate 3d arrays, 
+4d arrays, all the way up to a finite number that we haven't yet determined.
+
 The greatest mistakes come from the simplest errors.
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-We were going to add a lot more actions for the player to be able to do, such as investigating the crime scene, eavesdropping on other characters, and defending against accusations, but we realised that to do so we would need a lot more time that we didn't have, so we had to scrap those ideas. 
-We also left out the energy portion of the game that allowed the player to converse multiple times, because it would have been redundant to hear the same responses multiple times a day unless we had a lot of hard coded responses.
+We were going to add a lot more actions for the player to be able to do, 
+such as investigating the crime scene, eavesdropping on other characters, 
+and defending against accusations, but we realised that to do so we would 
+need a lot more time that we didn't have, so we had to scrap those ideas. 
+
+We also left out the energy portion of the game that allowed the player to 
+converse multiple times, because it would have been redundant to hear the 
+same responses multiple times a day unless we had a lot of hard coded 
+responses.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-There might be such a thing as too much planning, especially considering the small time frame that we had to complete the project. We were really vague when we were planning, and we delved into specifics for extra things that we didn't necessarily need. We spent so much time on that that we had only a few days to actually code everything out, and even still we couldn't manage to reach the point we were aiming for.
+There might be such a thing as too much planning, especially considering 
+the small time frame that we had to complete the project. We were really 
+vague when we were planning, and we delved into specifics for extra things 
+that we didn't necessarily need. We spent so much time on that that we 
+had only a few days to actually code everything out, and even still we 
+couldn't manage to reach the point we were aiming for.
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
