@@ -321,14 +321,21 @@ public class Woo{
 	    return;
 	int person2 = 0;
 	System.out.println("Which one?: \n" + display(livingChars));
-	while (p2 >= livingChars.size() || p2 < 1)
+	person2 = Keyboard.readInt();
+	while (person2 >= livingChars.size() || person2 < 1)
+	    {
+		System.out.println("Pick someone in the game who's not you.\n" + display(livingChars));
+		person2 = Keyboard.readInt();
+	    }
 	Character p2 = livingChars.get(person2);
 	for (int i = 0; i < 3 && i < livingChars.size() - 1; i++){
 	    System.out.println(Conversation.getInitQ());
-	    System.out.println(Conversation.getInitA(Keyboard.readInt() - 1));
-	    System.out.println("Would you like to ask another question? (0 for no, 1 for yes)");
-	    if (Keyboard.readInt() == 0)
-		break;
+	    System.out.println(p2 + ": " + Conversation.getInitA(Keyboard.readInt() - 1));
+	    if (i < 2){
+		System.out.println("Would you like to ask another question? (0 for no, 1 for yes)");
+		if (Keyboard.readInt() == 0)
+		    break;
+	    }
 	}
     }
     public static void end(){
