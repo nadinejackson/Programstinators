@@ -44,11 +44,11 @@ public class Woo{
 	
 	int countPlayers = 0;
 	livingChars.add(player);
-	System.out.println("How many other people do you want in this game? (min 7, max 20)");
+	System.out.println("How many other people do you want in this game? (min 12, max 20)");
 	countPlayers = Keyboard.readInt();
-	while (countPlayers < 7 || countPlayers > 20)
+	while (countPlayers < 12 || countPlayers > 20)
 	    {
-		System.out.println("That doesn't sound like a good game. Let's choose a number BETWEEN 7 and 20 (inclusive)");
+		System.out.println("That doesn't sound like a good game. Let's choose a number BETWEEN 12 and 20 (inclusive)");
 		countPlayers = Keyboard.readInt();
 	    }
 	popGame(countPlayers);//populates the game with countPlayer other players
@@ -160,9 +160,9 @@ public class Woo{
 
 	
 	if (maybeDed.isAlive())//if the person attacked didn't die
-	    System.out.println("It's daytime and no one died, not even " + maybeDed + "\n");
+	    System.out.println(Story.survivalStory(maybeDed));
 	else //if the person attacked did die
-	    System.out.println("It's daytime, and " + maybeDed + " died. \nThey were " + maybeDed.getType() + "\n");
+	    System.out.println(Story.deathStory(maybeDed)+"\nThey were " + maybeDed.getType() + "\n");
 
 	converse();//allows the player to talk to one person of their choosing
 	
@@ -171,7 +171,7 @@ public class Woo{
 
 	    if (Keyboard.readInt() == 1)//if the player wants to, accuses someone
 		{
-		    System.out.println("Whom? (Type therey're number)\n" + display(livingChars));
+		    System.out.println("Whom? (Type their number)\n" + display(livingChars));
 		    livingChars.get(Keyboard.readInt()).incAccusations();
 		}
 
@@ -187,8 +187,8 @@ public class Woo{
 			topTwee[i] = livingChars.get(i);
 		    }
 
-		//looks through for every character and if they have a higher sussusPointPoint
-		//then they replace them on the topTweelist
+		//looks through for every character and if they have a higher susPoint
+		//then they replace them on the topTwee list
 		for(int i = 3; i < livingChars.size(); i++)
 		    {
 			for (int x = 0; i < 3; i++)
@@ -199,6 +199,7 @@ public class Woo{
 				}
 			    }
 		    }
+		//every npc accuses one from the top 3
 		for(int i = 1; i < livingChars.size(); i++)
 		    {
 			int accusation = i;
@@ -209,21 +210,26 @@ public class Woo{
 			livingChars.get(i).accuse(topTwee[accusation]);
 		    }
 	    }
-		int rep = 0;
-		for(int i = 0; i < livingChars.size(); i++)
-		    {
-			if(livingChars.get(rep).getAccusations() < livingChars.get(i).getAccusations())
-			    {
-				rep = i;
-			    }
-		    }
-		livingChars.get(rep).changeSusPts(5);
 	    
+	    int rep = 0; //this is the person who will die (if they get voted out)
+	    //find max accusations
+	    for(int i = 0; i < livingChars.size(); i++)
+		{
+		    if(livingChars.get(rep).getAccusations() < livingChars.get(i).getAccusations())
+			{
+			    rep = i;
+			}
+		}
+	    livingChars.get(rep).changeSusPts(5); //rep becomes more suspicious
 	    
-		for (int i = 0; i < mafia.size(); i++)
-		    {
-			mafia.get(i).changeSusPts((int) (Math.random() * 5));
-		    }
+
+	    //mafia seems more suspicious
+	    for (int i = 0; i < mafia.size(); i++)
+		{
+		    mafia.get(i).changeSusPts((int) (Math.random() * 5));
+		}
+	    
+	    //allow the user a say in whether the person dies
 	    System.out.println("Do you think that " + livingChars.get(rep) + " should die for their actions? (0 or 1)");
 	    int votes = 0;
 	    if(Keyboard.readInt() == 1)
@@ -237,7 +243,7 @@ public class Woo{
 			    votes += 1;
 			}
 		}
-	    if (votes > livingChars.size() / 2)
+	    if (votes > livingChars.size() / 2) //if they get voted out, they die
 		{
 		    System.out.println("Oh hey look we killed a person and their name is " + livingChars.get(rep));
 		    livingChars.get(rep).die();
@@ -251,7 +257,7 @@ public class Woo{
 					}
 				}
 			}
-		    else
+		    else 
 			{
 			    for (int x = 0; x < citizens.size(); x++)
 				{
@@ -270,28 +276,28 @@ public class Woo{
 	}
     }//end day()
 
-    public static void night(){
-	int killIndex;
-	int saveIndex;
-	int susNum;
-	Character susOne;
-	if (player.getType().equals("Doctor"))
+    public static void night(){ //when the mafia kills, doctor saves, investigator investigates
+	int killIndex; //person who will be killed
+	int saveIndex; //person who will be saved
+	int susNum; //index of person who will be investigated
+	Character susOne; //the character of above
+	if (player.getType().equals("Doctor")) //doctor chooses who to save
 	    {
 		saveIndex = -2;
 		while (saveIndex < -1 || saveIndex >= livingChars.size()){
-		System.out.println("Type the number of who you want to save, in the following list:");
-		System.out.println(display(livingChars));
-		saveIndex = Keyboard.readInt();
+		    System.out.println("Type the number of who you want to save, in the following list:");
+		    System.out.println(display(livingChars));
+		    saveIndex = Keyboard.readInt();
 		}
 	    }
-	else{
+	else{ //npcs choose person to save randomly
 	    saveIndex =(int) (Math.random() * livingChars.size());
 	}
 	if (player.getType().equals("Investigator")){
 	    {
 		susNum = -2;
-		while (susNum < -1 || susNum >= livingChars.size() - 1){
-		    System.out.println("Type the number of who you want to investigate, in the following list:");
+		while (susNum < 0 || susNum >= livingChars.size() - 1){
+		    System.out.println("Type the number of who you want to investigate in the following list:");
 		    System.out.println(display(livingChars));
 		    susNum = Keyboard.readInt() - 1;
 		}
@@ -310,6 +316,7 @@ public class Woo{
 		}
 	    }
 	}
+	//mafia chooses who to kill (by voting with other mafia)
 	if (player.getType().equals("Mafia"))
 	    {
 		System.out.println("You and the other mafia:\n" + display(mafia) + "\nare preparing to kill.");
@@ -317,21 +324,22 @@ public class Woo{
 		while (killIndex < 0 || killIndex >= citizens.size()){
 		    System.out.println("Type the number of who you want to kill in the following list:");
 		    System.out.println(display(citizens));
-		    if (Math.random() < 0.5){
+		    if (Math.random() < 0.5){ //we like to give people a choose, but not too much
 			killIndex = Keyboard.readInt();
 			System.out.println("Fine, you get your way.");
 		    }
 		    else{
 			killIndex = (int) (Math.random() * citizens.size());
 			int x = Keyboard.readInt();
-			System.out.println("No one cares what you think, we killed " + citizens.get(killIndex) + ".");
+			System.out.println("No one cares what you think, we killed " + citizens.get(killIndex) + " instead.");
 		    }
 		
 		}
 	    }
-	else{
+	else{ //if the player is not a Mafia, it is completely random who dies
 	    killIndex = (int) (Math.random() * citizens.size());
 	}
+	//if no one is saved, kill the person the mafia picked. Otherwise, no one dies
 	if (!(livingChars.get(saveIndex).equals(citizens.get(killIndex))) || ! Doc.isAlive()){
 	    citizens.get(killIndex).die();
 	    maybeDed = citizens.remove(killIndex);
@@ -348,12 +356,12 @@ public class Woo{
 	
     }//end night()
 
-    public static void converse()
+    public static void converse() //allows the player to get info
     {
 	System.out.println("Would you like to speak to a townsperson? (0 for no, 1 for yes)");
 	if (Keyboard.readInt() == 0)
 	    return;
-	int person2 = 0;
+	int person2 = 0; //pick a person
 	System.out.println("Which one?: \n" + display(livingChars));
 	person2 = Keyboard.readInt();
 	while (person2 >= livingChars.size() || person2 < 1)
@@ -362,7 +370,7 @@ public class Woo{
 		person2 = Keyboard.readInt();
 	    }
 	Character p2 = livingChars.get(person2);
-	for (int i = 0; i < 3 && i < livingChars.size() - 1; i++){
+	for (int i = 0; i < 3 && i < livingChars.size() - 1; i++){ //talk a little
 	    System.out.println(Conversation.getInitQ());
 	    System.out.println(p2 + ": " + Conversation.getInitA(Keyboard.readInt() - 1));
 	    if (i < 2){
@@ -372,29 +380,40 @@ public class Woo{
 	    }
 	}
     }
-    public static void end(){
-
+    public static void end()
+    { //someone's dead
+	if (mafia.size() >= citizens.size())
+	    {
+		System.out.print("The mafia have won. There is chaos in the street and blood at every doorstep.");
+		if (player.isAlive() && player.getType().equals("Mafia"))
+		    System.out.println("How beautiful. Congratulations.");
+		else{
+		    System.out.println("How dare you let them get away with this.");
+		}
+	    }
+	else {
+	    System.out.println("There is peace in the land as the mafia has finally fallen.");
+	    if (player.getType().equals("Mafia"))
+		System.out.println("Horrid.");
+	    else{
+		System.out.println("Love fills the air.");
+	    }
+	    System.out.println("Here is who all the characters were:");
+	    System.out.println(display(livingChars));    
+	}
     }//end end()
 
-    public static void main(String[] args){
-	begin();
+	public static void main(String[] args){
+	    begin();
 	
-	while (mafia.size() < citizens.size() &&
-	       player.isAlive() && mafia.size() > 0){	    
-	    night();
-	    day();
+	    while (mafia.size() < citizens.size() &&
+		   player.isAlive() && mafia.size() > 0){	    
+		night();
+		day();
 	    }
+	    end();
 	
-	if (!(player.isAlive() ||
-	      ( !(player.getType().equals("Mafia")) && mafia.size() >= citizens.size()))) {
-	    System.out.println("You lose. :(\n");	    
-	}
-	else {
-	    System.out.println("You win!!!\n");
-	}
-	System.out.println("Here is who all the characters were:");
-	System.out.println(display(livingChars));
 
 	
-    }//end main()
-}//end Woo
+	}//end main()
+    }//end Woo
