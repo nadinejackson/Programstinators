@@ -6,23 +6,7 @@ pd 2
 ---------------------
 A text-based game of Mafia where the player is randomly assigned a role of Citizen, Doctor, Detective, or Mafia, competes against other pre-programmed players, and attempts to survive.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-USAGE:
-* Replace all fields, angle brackets included, with specified info.
-  eg, pd <pd#> --> pd 3
-* Delete these instructions once all teammates understand usage.
-  (from tilde bar above to tilde bar below)
 
-devlog--
-Use keyboard shortcut to jump to end,
- replicate entry template,
- modify appropriately.
-
-zone of reflection--
-Flesh out each category whenever necessary, appropriate.
- Need not be fully filled in until end of project,
- but best done as you go along.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 /////////// Zone of Reflection \\\\\\\\\\\
 ------------------------------------------
@@ -30,26 +14,19 @@ OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The biggest obstacle that we had to overcome was our programming procrastination (also known as programstination). Even though we had our plans prepared, it was difficult to try to start the project because it just seemed so huge. So we kept planning and making our ideas more complicated until we were forced to finally start, or face not being able to finish decent version of our project.
 
-UNRESOLVED ISSUES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<
-blah blah pesky bug...
-maybe some of these will move into the Obs.Ovrcm section...
->
-
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Though we didn’t use them, we learned that java can incorporate 3d arrays, 4d arrays, up to a finite number that we haven’t yet determined.
+Though we didn't use them, we learned that java can incorporate 3d arrays, 4d arrays, up to a finite number that we haven't yet determined.
 The greatest mistakes come from the simplest errors.
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-We were going to add a lot more actions for the player to be able to do, such as investigating the crime scene, eavesdropping on other characters, and defending against accusations, but we realised that to do so we would need a lot more time that we didn’t have, so we had to scrap those ideas. 
+We were going to add a lot more actions for the player to be able to do, such as investigating the crime scene, eavesdropping on other characters, and defending against accusations, but we realised that to do so we would need a lot more time that we didn't have, so we had to scrap those ideas. 
 We also left out the energy portion of the game that allowed the player to converse multiple times, because it would have been redundant to hear the same responses multiple times a day unless we had a lot of hard coded responses.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-There might be such a thing as too much planning, especially considering the small time frame that we had to complete the project. We were really vague when we were planning, and we delved into specifics for extra things that we didn’t necessarily need. We spent so much time on that that we had only a few days to actually code everything out, and even still we couldn’t manage to reach the point we were aiming for.
+There might be such a thing as too much planning, especially considering the small time frame that we had to complete the project. We were really vague when we were planning, and we delved into specifics for extra things that we didn't necessarily need. We spent so much time on that that we had only a few days to actually code everything out, and even still we couldn't manage to reach the point we were aiming for.
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -65,11 +42,16 @@ There might be such a thing as too much planning, especially considering the sma
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-
+2018-01-16
+--------------------------------------------------------------
+Nadine :: Worked on Woo.java as a driver, emplemented storyline.
+Fabiha :: Worked on Woo.java, added in inline comments, updated UML diagrams, devlog, and todo list
+Cheryl :: Worked on Woo.java, implemented conversation into day actions
+==============================================================
 2018-01-15
 --------------------------------------------------------------
 Nadine :: Fixed errors in mafia and detective, as a driver again
-Fabiha :: Fixed errors in mafia and detective, as well as Character.jav
+Fabiha :: Fixed errors in mafia and detective, as well as Character.java
 Cheryl :: Fixed errors in mafia and detective, planning for Conversation.java
 ==============================================================
 2018-01-14
