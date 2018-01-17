@@ -177,11 +177,18 @@ public class Woo{
 
 	    //if the mafia hasn't overrun the town
 	    if (citizens.size() > mafia.size()){
+
+		//will contain the 3 characters who have the hightest susPoint 
 		Character[] topTwee = new Character[3];
+
+		//starts off with the first 3 living characters
 		for(int i = 0; i < 3; i++)
 		    {
 			topTwee[i] = livingChars.get(i);
 		    }
+
+		//looks through for every character and if they have a higher sussusPointPoint
+		//then they replace them on the topTweelist
 		for(int i = 3; i < livingChars.size(); i++)
 		    {
 			for (int x = 0; i < 3; i++)
