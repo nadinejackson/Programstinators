@@ -14,6 +14,16 @@ OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The biggest obstacle that we had to overcome was our programming procrastination (also known as programstination). Even though we had our plans prepared, it was difficult to try to start the project because it just seemed so huge. So we kept planning and making our ideas more complicated until we were forced to finally start, or face not being able to finish decent version of our project.
 
+UNRESOLVED ISSUES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+We had issues with the Doctor being able to converse with the townspeople after
+dying, and error handling for the voting and accusing processes. When entering a
+number outside of the dictated range, it would break out of the game. 
+
+These errors were largely because we ran out of time to clean it up completely 
+before the deadline, but we managed to resolve most of them on our own time before
+the demo.
+
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Though we didn't use them, we learned that java can incorporate 3d arrays, 
@@ -55,6 +65,14 @@ couldn't manage to reach the point we were aiming for.
     \____/_( \_____\( \___/_(   \_____\( \_____\( \_____\( 
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+2018-01-17
+--------------------------------------------------------------
+Nadine :: 
+Fabiha :: Fixed errors with Doctor being able to converse with townspeople, and exception cases
+Cheryl :: Finished final portion of converse method, reformatted code and updated devlog 
+==============================================================
 
 2018-01-16
 --------------------------------------------------------------
