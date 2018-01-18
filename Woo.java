@@ -169,15 +169,23 @@ public class Woo{
 	else //if the person attacked did die
 	    System.out.println(Story.deathStory(maybeDed)+ "\n" + maybeDed + " was a " + maybeDed.getType() + ".\n");
 
-	converse();//allows the player to talk to one person of their choosing
+
 	
 	if (player.isAlive()){
-	    System.out.println("Do you have an accusation? (0 for no, 1 for yes)");
+	    converse();//allows the player to talk to one person of their choosing
+	    System.out.println("Do you have an accusation? (1 for yes, any other number for no)");
 
 	    if (Keyboard.readInt() == 1)//if the player wants to, accuses someone
 		{
 		    System.out.println("\nWhom? (Type their number)\n" + display(livingChars));
-		    livingChars.get(Keyboard.readInt()).incAccusations();
+		    int tempAccus = Keyboard.readInt();
+		    while (tempAccus < 0 || tempAccus >= livingChars.size())
+			{
+			    System.out.println("Please enter a valid person.");
+			    tempAccus = Keyboard.readInt();
+			}
+		    livingChars.get(tempAccus).incAccusations();
+
 		}
 
 	    //if the mafia hasn't overrun the town
@@ -236,7 +244,7 @@ public class Woo{
 	    
 	    //allow the user a say in whether the person dies
 	    System.out.println("After a heated discussion, the townspeople decided that " + livingChars.get(rep) + " is too suspicious to live.\n" + 
-			       "Do you think that " + livingChars.get(rep) + " should die for their actions? (0 or 1)");
+			       "Do you think that " + livingChars.get(rep) + " should die for their actions? (1 for yes, any other number for no)");
 	    int votes = 0;
 	    if(Keyboard.readInt() == 1)
 		{
@@ -365,7 +373,7 @@ public class Woo{
 
     public static void converse() //allows the player to get info
     {
-	System.out.println("Would you like to speak to a townsperson? (0 for no, 1 for yes)\n");
+	System.out.println("Would you like to speak to a townsperson? (0 for no, any other number for yes)\n");
 	if (Keyboard.readInt() == 0)
 	    return;
 	int person2 = 0; //pick a person
@@ -373,26 +381,44 @@ public class Woo{
 	person2 = Keyboard.readInt();
 	while (person2 >= livingChars.size() || person2 < 1)
 	    {
-		System.out.println("Pick someone in the game who's not you.\n" + display(livingChars));
+		System.out.println("Pick someone in the game who's not you and is still a valid character.\n" + display(livingChars));
 		person2 = Keyboard.readInt();
 	    }
 	Character p2 = livingChars.get(person2);
 	for (int i = 0; i < 3 && i < livingChars.size() - 1; i++){ //talk a little
 	    System.out.println(Conversation.getInitQ());
 	    int x = Keyboard.readInt();
+	    while (x < 1  || x > 3)
+		{  
+		    System.out.println("The options only go from 1 to 3.");
+		    x = Keyboard.readInt();
+		}
+
+
 	    System.out.println("\nYou ask: " + Conversation.getAnyInit(x  - 1, 0));
 	    System.out.println(p2 + " says: " + Conversation.getInitA(x - 1) + "\n");
 	    System.out.println(p2 + " has a question for you as well.\n");
 	    System.out.println(p2 + " asks: " + Conversation.getFollowQ());
 	    System.out.println("What would you like to say?\n" + Conversation.getFollowA());
-	    System.out.println("\nYou say: " + Conversation.getAnyFollow(Keyboard.readInt()) + "\n");
+	    int y = Keyboard.readInt();
+	    while (y < 1  || y > 3)
+		{  
+		    System.out.println("The options only go from 1 to 3.");
+		    y = Keyboard.readInt();
+		}
+
+	    System.out.println("\nYou say: " + Conversation.getAnyFollow(y) + "\n");
 	    break;
 	}
     }
 
 public static void end()
 { //someone's dead
-    if (mafia.size() >= citizens.size())
+    if (!player.isAlive())
+	{
+	    System.out.println("You've died too early. Now you'll never know what will happen.");
+	}
+    else if (mafia.size() >= citizens.size())
 	{
 	    System.out.print("The mafia have won. There is chaos in the street and blood at every doorstep.");
 	    if (player.isAlive() && player.getType().equals("Mafia"))
