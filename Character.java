@@ -44,7 +44,7 @@ public class Character{
 	return accusations;
     }
     public void incAccusations(){
-	accusations += 1;
+	accusations += 3;
     }
     public void resetAcc(){
 	accusations = 0;

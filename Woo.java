@@ -167,7 +167,7 @@ public class Woo{
 	if (maybeDed.isAlive())//if the person attacked didn't die
 	    System.out.println(Story.survivalStory(maybeDed));
 	else //if the person attacked did die
-	    System.out.println(Story.deathStory(maybeDed)+ "\n\n" + maybeDed + " was a " + maybeDed.getType() + ".\n");
+	    System.out.println(Story.deathStory(maybeDed)+ "\n" + maybeDed + " was a " + maybeDed.getType() + ".\n");
 
 	converse();//allows the player to talk to one person of their choosing
 	
@@ -231,7 +231,7 @@ public class Woo{
 	    //mafia seems more suspicious
 	    for (int i = 0; i < mafia.size(); i++)
 		{
-		    mafia.get(i).changeSusPts((int) (Math.random() * 5));
+		    mafia.get(i).changeSusPts((int) (Math.random() * 3));
 		}
 	    
 	    //allow the user a say in whether the person dies
@@ -380,48 +380,49 @@ public class Woo{
 	for (int i = 0; i < 3 && i < livingChars.size() - 1; i++){ //talk a little
 	    System.out.println(Conversation.getInitQ());
 	    int x = Keyboard.readInt();
-	     System.out.println("\nYou ask: " + Conversation.getAnyInit(x  - 1, 0) + "\n");
-			       System.out.println(p2 + " says : " + Conversation.getInitA(x - 1) + "\n");
-			      
-	    if (i < 2){
-		System.out.println("Would you like to ask another question? (0 for no, 1 for yes)");
-		if (Keyboard.readInt() == 0)
-		    break;
-	    }
+	    System.out.println("\nYou ask: " + Conversation.getAnyInit(x  - 1, 0));
+	    System.out.println(p2 + " says: " + Conversation.getInitA(x - 1) + "\n");
+	    System.out.println(p2 + " has a question for you as well.\n");
+	    System.out.println(p2 + " asks: " + Conversation.getFollowQ());
+	    System.out.println("What would you like to say?\n" + Conversation.getFollowA());
+	    System.out.println("\nYou say: " + Conversation.getAnyFollow(Keyboard.readInt()) + "\n");
+	    break;
 	}
     }
-    public static void end()
-    { //someone's dead
-	if (mafia.size() >= citizens.size())
-	    {
-		System.out.print("The mafia have won. There is chaos in the street and blood at every doorstep.");
-		if (player.isAlive() && player.getType().equals("Mafia"))
-		    System.out.println("How beautiful. Congratulations.");
-		else{
-		    System.out.println("How dare you let them get away with this.");
-		}
-	    }
-	else {
-	    System.out.println("There is peace in the land as the mafia has finally fallen.");
-	    if (player.getType().equals("Mafia"))
-		System.out.println("Horrid.\n");
+
+public static void end()
+{ //someone's dead
+    if (mafia.size() >= citizens.size())
+	{
+	    System.out.print("The mafia have won. There is chaos in the street and blood at every doorstep.");
+	    if (player.isAlive() && player.getType().equals("Mafia"))
+		System.out.println("How beautiful. Congratulations.");
 	    else{
-		System.out.println("Love fills the air.");
+		System.out.println("How dare you let them get away with this.");
 	    }
 	}
-    }//end end()
+    else {
+	System.out.println("There is peace in the land as the mafia has finally fallen.");
+	if (player.getType().equals("Mafia"))
+	    System.out.println("Horrid.\n");
+	else{
+	    System.out.println("Love fills the air.");
+	}
+    }
+}//end end()
 
-	public static void main(String[] args){
-	    begin();
+public static void main(String[] args){
+    begin();
 	
-	    while (mafia.size() < citizens.size() &&
-		   player.isAlive() && mafia.size() > 0){	    
-		night();
-		day();
-	    }
-	    end();
+    while (mafia.size() < citizens.size() &&
+	   player.isAlive() && mafia.size() > 0){	    
+	night();
+	day();
+    }
+    end();
 	
 
 	
-	}//end main()
-    }//end Woo
+}//end main()
+}//end Woo
+
